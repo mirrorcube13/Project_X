@@ -1,4 +1,4 @@
 RewriteEngine on
-RewriteCond %{REQUEST_URI} !front/*
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteBase /
 RewriteRule .* index.php [QSA,L]
