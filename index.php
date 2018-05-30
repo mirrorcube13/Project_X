@@ -1,5 +1,5 @@
 <?php
-  include 'bootstrap.php';
+  require_once 'bootstrap.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Project_X</title>
+    <title><?= get_page_title() ?></title>
 
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/all.css" rel="stylesheet">
@@ -24,15 +24,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Brand</a>
+        <a class="navbar-brand" href="/">Главная</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#">Спецпредложения</a></li>
+        <li><a href="searchresults">Подобрать отель</a></li>
         <?php if (is_admin()): ?>
-          <li><a href="#">Добавить отель</a></li>
+          <li><a href="registration-hotel">Добавить отель</a></li>
         <?php endif; ?>
       </ul>
 

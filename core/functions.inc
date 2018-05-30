@@ -27,6 +27,7 @@ function save_user($input) {
   $input['u_pass'] = sha1($input['u_pass']);
   unset($input['u_pass2']);
   $input['u_registered'] = time();
+  $input['u_email'] = strtolower($input['u_email']);
   $db = DB::getObject();
   $db->insert('users', $input);
   return $db->getLastId();
@@ -65,6 +66,7 @@ function auth_user($input) {
     }
   }
   $input['u_pass'] = sha1($input['u_pass']);
+  $input['u_email'] = strtolower($input['u_email']);
   try {
     $user = DB::getObject()->select('users')
       ->where('u_email', $input['u_email'])
@@ -78,4 +80,10 @@ function auth_user($input) {
 
 function is_admin() {
   return (isset($_SESSION['user']) && $_SESSION['user']['u_admin']);
+}
+
+function get_page_title() {
+  global $config;
+  $path = ltrim($_SERVER['REQUEST_URI'], '/');
+  return isset($config['page_titles'][$path]) ? $config['page_titles'][$path] : $config['page_titles']['index'];
 }

@@ -247,7 +247,7 @@ class DB
         else throw new \Exception(self::LAST_ID_NOT_SET);
     }
 
-    public function getColumns($table) : array {
+    public function getColumns($table) {
         $columns = [];
 
         $this->select($table)->limit(0);

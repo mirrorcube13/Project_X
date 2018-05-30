@@ -2,24 +2,25 @@
   <div class="container-fluid">
     <div class="col-md-4">
       <div id="main-form">
-        <form onsubmit="alert('submit');return false" >
+        <form action="searchresults" method="post">
           <h2><i class="fas fa-search"></i> Поиск отелей</h2>
           <hr>
-          <label>Город, отель, место или адрес</label><input type="text" size="30" value="Например, Токио" onfocus="if (this.value == ' Например, Токио') {this.value = '';}" onblur="if (this.value == '') {this.value = ' Например, Токио';}">
+          <label>Город, отель, место или адрес</label>
+            <input name="c_name" type="text" size="30" value="" placeholder="Например, Токио">
           <hr>
           <div class="row">
-            <div class="col-md-6">Заезд<br><input id="date" type="date"></div>
-            <div class="col-md-6">Выезд<br><input id="date" type="date"></div>
+            <div class="col-md-6">Заезд<br><input name="r_start" id="date" type="date"></div>
+            <div class="col-md-6">Выезд<br><input name="r_end" id="date" type="date"></div>
           </div>
           <hr>
-          <select name="" id="adult" class="">
+          <select name="r_capacity" id="adult" class="">
             <option value="1" selected="selected">1 взрослый</option>
             <option value="2" >2 взрослых</option>
             <option value="3">3 взрослых</option>
             <option value="4">4 взрослых</option>
             <option value="5">2 взрослых</option>
           </select>
-          <select name="" id="child" class="">
+          <select name="r_capacity_child" id="child" class="">
             <option value="0" selected="selected">Без детей</option>
             <option value="1">1 ребенок</option>
             <option value="2">2 детей</option>
@@ -27,15 +28,8 @@
             <option value="4">4 детей</option>
             <option value="5">5 детей</option>
           </select>
-          <select name="" id="hotel-number" class="">
-            <option value="1" selected="selected">1 номер</option>
-            <option value="2">2 номера</option>
-            <option value="3">3 номера</option>
-            <option value="4">4 номера</option>
-            <option value="5">5 номеров</option>
-          </select>
           <hr>
-          <input type="submit" value="Искать" onclick="location.href='searchresults.html'">
+          <input type="submit" value="Искать">
         </form>
       </div>
     </div>
@@ -109,10 +103,4 @@
   </div>
 </div>
 
-<footer>
-  <a href=""><i class="fab fa-vk"></i> Вконтакте</a>
-  <a href=""><i class="fab fa-facebook-f"></i> Facebook</a>
-  <a href=""><i class="fab fa-instagram"></i> Instagram</a>
-  <hr>
-  <p>2018</p>
-</footer>
+<?php include_once 'parts/footer.php'?>
