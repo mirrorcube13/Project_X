@@ -1,0 +1,1 @@
+<footer><p>Krasovskii © Copyright 2018</p></footer>
