@@ -1,5 +1,6 @@
 <?php
 
+define('PAGE_LIMIT', 10);
 
 function validate_user($input) {
   foreach ($input as $key => $item) {
@@ -106,4 +107,54 @@ function render_selected(&$item, $value) {
 
 function render_checked(&$item, $value) {
   return (isset($item) && is_array($item) && in_array($value, $item)) ? 'checked' : '';
+}
+
+function get_hotels($params) {
+  $db = DB::getObject();
+  build_hotels_query($params);
+  $offset = isset($_GET['page']) ? $_GET['page'] : 0;
+  $db->limit($offset, PAGE_LIMIT);
+
+  return $db->get();
+}
+
+function count_hotels($params) {
+  $db = DB::getObject();
+  build_hotels_query($params);
+  return $db->count();
+}
+
+function build_hotels_query($params) {
+  $db = DB::getObject();
+  $db->select('rooms')
+    ->join('cities', 'r_city', 'c_id')
+    ->join('rooms_convs', 'r_id', 'rc_room_id');
+
+  if (!empty($params['r_start'])) {
+    $db->where('r_start', strtotime($params['r_start']), '>=');
+  }
+  unset($params['r_start']);
+  if (!empty($params['r_end'])) {
+    $db->where('r_end', strtotime($params['r_end']), '<=');
+  }
+  unset($params['r_end']);
+
+  if (!empty($params['convs'])) {
+    foreach ($params['convs'] as $conv) {
+      $db->where($conv, 1);
+    }
+  }
+  unset($params['convs']);
+
+  foreach ($params as $column => $value) {
+    if (is_array($value)) {
+      $db->whereIn($column, $value);
+    } else {
+      $db->where($column, $value);
+    }
+  }
+}
+
+function render_hotels($hotels = []) {
+  require_once __DIR__ . '/../pages/parts/hotels.php';
 }

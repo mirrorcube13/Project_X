@@ -22,9 +22,10 @@ CREATE TABLE IF NOT EXISTS `cities` (
 -- Дамп данных таблицы diplom.cities: ~3 rows (приблизительно)
 /*!40000 ALTER TABLE `cities` DISABLE KEYS */;
 INSERT INTO `cities` (`c_id`, `c_name`, `с_description`) VALUES
-	(1, 'токио', 'цветущий токио - столица японии '),
-	(2, 'лондон', NULL),
-	(3, 'париж', NULL);
+	(1, 'Токио', 'Цветущий токио - столица японии '),
+	(2, 'Логдон', NULL),
+	(3, 'Париж', NULL),
+	(4, 'Лас-Вегас', NULL);
 /*!40000 ALTER TABLE `cities` ENABLE KEYS */;
 
 -- Дамп структуры для таблица diplom.rooms
@@ -43,6 +44,8 @@ CREATE TABLE IF NOT EXISTS `rooms` (
 
 -- Дамп данных таблицы diplom.rooms: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `rooms` DISABLE KEYS */;
+INSERT INTO `rooms` (`r_id`, `r_name`, `r_desc`, `r_price`, `r_start`, `r_end`, `r_city`, `r_capacity`, `r_capacity_child`) VALUES
+	(1, 'Спальгы', 'аываы ', 433, 1527638400, 1528738400, 1, 1, 3);
 /*!40000 ALTER TABLE `rooms` ENABLE KEYS */;
 
 -- Дамп структуры для таблица diplom.rooms_convs
@@ -63,6 +66,8 @@ CREATE TABLE IF NOT EXISTS `rooms_convs` (
 
 -- Дамп данных таблицы diplom.rooms_convs: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `rooms_convs` DISABLE KEYS */;
+INSERT INTO `rooms_convs` (`rc_room_id`, `rc_stars`, `rc_wifi`, `rc_transfer`, `rc_parking`, `rc_pool`, `rc_fitness`, `rc_balcony`, `rc_cond`, `rc_coffee`, `rc_tub`) VALUES
+	(1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 /*!40000 ALTER TABLE `rooms_convs` ENABLE KEYS */;
 
 -- Дамп структуры для таблица diplom.users
@@ -80,13 +85,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Дамп данных таблицы diplom.users: ~7 rows (приблизительно)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`u_id`, `u_email`, `u_name`, `u_pass`, `u_registered`, `u_admin`) VALUES
-	(1, 'wer@e.com', 'fwer', '19187dc98dce52fa4c4e8e05b341a9b77a51fd26', 1527547239, 0),
-	(2, 'a@a.com', 'ro', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1527582212, 0),
-	(4, 'aa@ar.com', 'ro', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1527584668, 0),
-	(5, 'wer@e.comx', 'ro', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1527584889, 0),
-	(6, 'roman@a.coma', 'ro', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1527586299, 0),
-	(7, 'rorwer@a.com', 'ro', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1527586505, 0),
-	(8, 'roman@a.com', 'ro', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1527625628, 0);
+	(8, 'roman@a.com', 'Roman', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1527625628, 1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

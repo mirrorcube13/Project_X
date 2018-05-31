@@ -26,21 +26,22 @@ $stars_opts = [
 ];
 
 $convs_opts = [
-  'Бесплатный Wi-fi' => 1,
-  'Трансфер от/до аэропорта' => 2,
-  'Парковка' => 3,
-  'Бассейн' => 4,
-  'Фитнес-центр' => 5,
+  'Бесплатный Wi-fi' => 'rc_wifi',
+  'Трансфер от/до аэропорта' => 'rc_transfer',
+  'Парковка' => 'rc_parking',
+  'Бассейн' => 'rc_pool',
+  'Фитнес-центр' => 'rc_fitness',
 ];
 
 $room_convs_opts = [
-  'Балкон' => 1,
-  'Кондиционер' => 2,
-  'Кофемашина' => 3,
-  'Ванна' => 4,
+  'Балкон' => 'rc_balcony',
+  'Кондиционер' => 'rc_cond',
+  'Кофемашина' => 'rc_coffee',
+  'Ванна' => 'rc_tub',
 ];
+
 ?>
-<form action="searchresults" method="post">
+<form action="searchresults" method="get">
   <h2><i class="fas fa-search"></i> Поиск отелей</h2>
   <hr>
   <label>Город, отель, место или адрес</label>
@@ -62,13 +63,14 @@ $room_convs_opts = [
     <?php endforeach; ?>
   </select>
   <hr>
+  <input type="hidden" name="action" value="search">
   <input type="submit" value="Искать">
 
 <?php if ($convs): ?>
   <div id="filter">
     <h4>Количество звезд</h4>
     <?php foreach ($stars_opts as $label => $value): ?>
-    <p><input type="checkbox" name="star[]" value="<?= $value ?>" <?= render_checked($params['star'], $value) ?>><?= $label ?></p>
+    <p><input type="checkbox" name="rc_stars[]" value="<?= $value ?>" <?= render_checked($params['rc_stars'], $value) ?>><?= $label ?></p>
     <?php endforeach; ?>
     <hr>
     <h4>Удобства</h4>
@@ -77,8 +79,8 @@ $room_convs_opts = [
     <?php endforeach; ?>
     <hr>
     <h4>Удобства в номере</h4>
-    <?php foreach ($convs_opts as $label => $value): ?>
-      <p><input type="checkbox" name="room_convs[]" value="<?= $value ?>" <?= render_checked($params['room_convs'], $value) ?>><?= $label ?></p>
+    <?php foreach ($room_convs_opts as $label => $value): ?>
+      <p><input type="checkbox" name="convs[]" value="<?= $value ?>" <?= render_checked($params['convs'], $value) ?>><?= $label ?></p>
     <?php endforeach; ?>
   </div>
   <?php endif;?>
