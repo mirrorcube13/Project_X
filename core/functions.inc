@@ -87,3 +87,23 @@ function get_page_title() {
   $path = ltrim($_SERVER['REQUEST_URI'], '/');
   return isset($config['page_titles'][$path]) ? $config['page_titles'][$path] : $config['page_titles']['index'];
 }
+
+function mb_ucfirst($text) {
+  return mb_strtoupper(mb_substr($text, 0, 1)) . mb_substr($text, 1);
+}
+
+function get_search_form($params = [], $convs = FALSE) {
+  require_once __DIR__ . '/../pages/parts/search_form.php';
+}
+
+function render(&$item) {
+  return (isset($item)) ? $item : '';
+}
+
+function render_selected(&$item, $value) {
+  return (isset($item) && $item == $value) ? 'selected="selected"' : '';
+}
+
+function render_checked(&$item, $value) {
+  return (isset($item) && is_array($item) && in_array($value, $item)) ? 'checked' : '';
+}
