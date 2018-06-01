@@ -84,7 +84,8 @@ class DB
      *
      * @return $this
      */
-    public function where($field, $value, $operator = '=', $condition = 'AND' ){
+    public function where($field, $value, $operator = '=', $condition = 'AND' )
+    {
         $this->constraints['where'] []= [
             'field' => $field,
             'value' => $value,
@@ -95,7 +96,8 @@ class DB
         return $this;
     }
 
-    public function whereIn($filed, array $values, $condition = 'AND'){
+    public function whereIn($filed, array $values, $condition = 'AND')
+    {
         $this->constraints['in'] []= [
             'field'     => $filed,
             'values'    => $values,
@@ -139,15 +141,19 @@ class DB
             }
         }
 
-        if (!empty($this->constraints['in'])){
-
-            $nOfWhereIn = count($this->constraints['in']);
-
-            if (1 === $nOfWhereIn){
-                $values = '(' . implode(', ' , $this->prepareValues($this->constraints['in'][0]['values']) ) . ')';
-                $this->query .= "WHERE {$this->constraints['in'][0]['field']} IN {$values} ";
+        if (!empty($this->constraints['in'])) {
+            $where_ins = $this->constraints['in'];
+            $where_in = array_shift($where_ins);
+            $values = '(' . implode(', ' , $this->prepareValues($where_in['values']) ) . ')';
+            if (empty($this->constraints['where'])) {
+              $this->query .= "WHERE {$where_in['field']} IN {$values} ";
+            } else {
+              $this->query .= "{$where_in['condition']} {$where_in['field']} IN {$values} ";
             }
-
+            foreach ($where_ins as $where_in) {
+              $values = '(' . implode(', ' , $this->prepareValues($where_in['values']) ) . ')';
+              $this->query .= "{$where_in['condition']} {$where_in['field']} IN {$values} ";
+            }
         }
 
         if (!empty($this->constraints['order'])){
@@ -373,6 +379,16 @@ class DB
     {
         $this->constraints = [];
         $this->query = '';
+    }
+
+    public function count() {
+      $this->query = preg_replace(
+        '@SELECT (.*) FROM@',
+        'SELECT COUNT(1) as total FROM',
+        $this->query
+      );
+      $result = $this->get();
+      return (int) $result['total'];
     }
 
 }
