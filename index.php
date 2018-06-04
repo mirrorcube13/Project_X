@@ -11,6 +11,7 @@
 
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/all.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
